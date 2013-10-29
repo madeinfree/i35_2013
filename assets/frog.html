@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>天羅地網 - 生物類別</title>
+    <title>天羅地網 - 青蛙</title>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
@@ -15,13 +15,9 @@
       }
     </style>
   </head>
-  <body>
-    <center><h1>生物類別</h1></center>
-    <br>
-    <a href="butterfly.html"><div class="button5 tcenter">蝴蝶</div></a>
-    <br>
-    <a href="frog.html"><div class="button5 tcenter">青蛙</div></a>
-    <br>
-    <a href="moth.html"><div class="button5 tcenter">蛾</div></a>
+  <body onload="initialize()">
+    <center><span style="font-size:200%;">青蛙</span></center>
+    <div id="map_canvas" style="width: device-width; height: 150px;">google map 讀取中...</div>
+    <div id="result"></div>
   </body>
 </html>

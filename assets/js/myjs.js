@@ -3,16 +3,13 @@ var map,centerPoint,
     z=0,
     z1=0;
 var path,data;
-var theTitle = document.getElementById("theTitle");
-var resultDiv = document.getElementById("result");
+var resultDiv;
+var theLat=1,theLng=1;
 
 //Result Array
 var A_i35_1,
     A_i35_2 = [];
-
-
 var canDoing = true;
-
 var imgNum = 0;
 
 function initialize() {
@@ -32,10 +29,10 @@ function initialize() {
     mark(point.lat(),point.lng());
     placeMarker(point.lat(),point.lng());
     //執行ajax
-    AjaxPost();
+    AjaxPost(1,point.lat(),point.lng());
   }
  });
-
+  resultDiv = document.getElementById("result");
 }
 
 function mark(lat, lng){ //標註座標函式
@@ -82,32 +79,10 @@ function placeMarker(lat, lng) {
   z=1;
 }
 
-//android傳送經緯度到JS利用此function
-function Android_to_JS_Latlng(lat, lng, theSpecies) {
-  if(lat === undefined) {
-    lat = point.lat();
-    lng = point.lng();
-  }
-  mark(lat,lng);
-  placeMarker(lat,lng);
-  //設定path
-  path = "http://bio.vexp.idv.tw/~rys/open/wetmap/s_adv.php?type="+theSpecies+"&x="+lng+"&y="+lat+"&m=5";
-  //設定Title
-  if(theSpecies==1){
-    theTitle.innerHTML='蝴蝶';
-  } else if(theSpecies==2){
-    theTitle.innerHTML='青蛙';
-  } else if(theSpecies==3){
-    theTitle.innerHTML='蛾';
-  }
-  //執行ajax
-  //AjaxPost();
-}
-
-function AjaxPost() {
+function AjaxPost(theSpeciesID,LocationLat,LocationLng) {
   $.ajax({
     type:"GET",
-    url:path,
+    url:"http://bio.vexp.idv.tw/~rys/open/wetmap/s_adv.php?type="+theSpeciesID+"&x="+LocationLng+"&y="+LocationLat+"&m=5",
     cache:false,
     dataType:"text",
     success:function(data){
@@ -149,4 +124,21 @@ function Change_Sensor_Deviceorientation(event) {
           canDoing = true;
         }, 1000);
   }
+}
+
+function GetLocationAndSelect() {
+  theLng = window.inwcall.GetLocationLng();
+  theLat = window.inwcall.GetLocationLat();
+  
+  if(theLng==0 || theLat==0){ //如果沒有取得經緯度
+    resultDiv.innerHTML='<font color="red">尚未取得經緯度，請等待。</font>';
+  } else { //有取得經緯度
+    mark(theLat,theLng);
+    placeMarker(theLat,theLng);
+    AjaxPost(1,theLat,theLng);
+  }
+}
+
+function ExitApp() {
+  inwcall.ExitApp();
 }

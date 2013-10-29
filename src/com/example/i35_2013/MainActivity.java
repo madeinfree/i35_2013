@@ -73,6 +73,14 @@ public class MainActivity extends Activity implements LocationListener {
 		public void ExitApp() {
 			android.os.Process.killProcess(android.os.Process.myPid());
 		}
+		//得到經度
+		public double GetLocationLng() {
+			return lng;
+		}
+		//得到緯度
+		public double GetLocationLat() {
+			return lat;
+		}
 	}
 	
 	//處理webview back與app 的問題
@@ -105,10 +113,11 @@ public class MainActivity extends Activity implements LocationListener {
 	
 	private void getLocation(Location location) {	//將定位資訊顯示在畫面中
 		if(location != null) {
-			lng = location.getLongitude();	//取得經度
-			lat = location.getLatitude();	//取得緯度
+			lat= 23.945154695027593;
+			lng= 120.98384857177734;
+			//lng = location.getLongitude();	//取得經度
+			//lat = location.getLatitude();	//取得緯度
 			Log.i(TAG,"經度:"+lng+"緯度:"+lat);
-			webview.loadUrl("javascript:Android_to_JS_Latlng('23.945154695027593','120.98384857177734',"+species+")");
 		} else {
 			Toast.makeText(this, "無法定位座標", Toast.LENGTH_LONG).show();
 		}
