@@ -2,6 +2,21 @@
 	width:100%;
 }
 
+a {
+	color:white;
+	text-decoration: none;
+}
+
+a:visited {
+	color:white;
+	text-decoration: none;	
+}
+
+a:hover {
+	color:white;
+	text-decoration: none;
+}
+
 .tcenter {
 	position: relative;
 	margin: 0 auto;

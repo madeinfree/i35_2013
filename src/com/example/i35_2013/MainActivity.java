@@ -42,178 +42,15 @@ public class MainActivity extends Activity implements LocationListener {
 	private boolean onThreadStatus = false;
 	private boolean onSearch = false;
 	private int species;
-	/*********************************************************************
-	
-	//Handler switch flag
-	protected static final int Result_Data = 0x1;
-	//Handler 接收Thread訊息
-	Handler handler = new Handler() {
-		@Override
-		public void handleMessage(Message msg) {
-			switch(msg.what) {
-				case Result_Data:
-					String result = null;
-					if(msg.obj instanceof String) {
-						result = (String) msg.obj;
-					}
-					if(result != null) {
-						int start,row;
-						//先將xml最上方的註解移除
-						start=result.indexOf("<rows>");
-						result=result.substring(start);
-						//共有幾筆資料
-						row = NumberOfKeywords(result,"<row>");
-						Log.i(TAG,"row:"+String.valueOf(row));
-						String[] strkey = {
-								"near",
-								"rid",
-								"collcet_time",
-								"lon",
-								"lat",
-								"Collector_id",
-								"Collector",
-								"ez_id",
-								"ez_name",
-								"fam",
-								"genus_infra"
-								};
-						resultrow = new String[row][strkey.length];
-						String strtmp=""; //暫存每筆資料字串
-						int row_start = 0,row_end = 0;
-						//theText.delete(0, theText.length());
-						theText.append("---------START----------\n");
-						for(int i=0;i<row;i++){
-							if(i==0){
-								row_start = result.indexOf("<row>");
-								row_end = result.indexOf("</row>");
-							} else {
-								row_start+=5; row_end+=6;
-								row_start = result.indexOf("<row>",row_start);
-								row_end = result.indexOf("</row>",row_end);
-							}
-							strtmp = result.substring(row_start,row_end+6);
-							int p_start,p_end;
-							for(int j=0;j<strkey.length;j++){
-								p_start = strtmp.indexOf("<"+strkey[j]+">");
-								p_end = strtmp.indexOf("</"+strkey[j]+">");
-								resultrow[i][j] = strtmp.substring(p_start+strkey[j].length()+2,p_end);
-							}
-							AddResult(i);
-						}
-						theText.append("\n---------END----------");
-						tv.setText(theText);
-						onThreadStatus = false;
-					}
-				break;
-			}
-		}
-	};
-	
-	//取得String中某個字串出現的次數
-	public static int NumberOfKeywords(String strKeywords, String strkey){
-		int index1,index2; //最前面最後面
-		index1=strKeywords.indexOf(strkey);
-		index2=strKeywords.lastIndexOf(strkey);
-		int spcount=0; //次數
-		if(index1 >= 0){
-			while(index1 <= index2){
-				index1 += strkey.length();
-				index1 = strKeywords.indexOf(strkey,index1);
-				spcount++;
-				if(index1 == -1){
-					break;
-				}
-			}
-		}
-		return spcount;
-	}
-	
-	private void AddResult(int theRow) {
-		theText.append("公尺距離: "+resultrow[theRow][0]+"\n");
-		theText.append("採集編號: "+resultrow[theRow][1]+"\n");
-		theText.append("採集時間: "+resultrow[theRow][2]+"\n");
-		theText.append("經度: "+resultrow[theRow][3]+"\n");
-		theText.append("緯度: "+resultrow[theRow][4]+"\n");
-		theText.append("採集人編號: "+resultrow[theRow][5]+"\n");
-		theText.append("採集人名: "+resultrow[theRow][6]+"\n");
-		theText.append("簡易分類編號: "+resultrow[theRow][7]+"\n");
-		theText.append("簡易分類名稱: "+resultrow[theRow][8]+"\n");
-		theText.append("中文科名: "+resultrow[theRow][9]+"\n");
-		theText.append("中文學名: "+resultrow[theRow][10]+"\n\n");
-	}
-	
-	
-	// Get方式請求  
-	public void requestByGet() throws Throwable {
-		try {
-		    // 新建一個URL對象
-			//path = "http://www.i35.club.tw/xml/near.php?lon="+lng+"&lat="+lat+"&l=119.167800&r=122.047400&u=25.336300&d=21.866000&ez=15&lm=800&cnt=50&page=1";
-			path = "http://www.i35.club.tw/xml/near.php?lon=120.80148&lat=23.828677&l=119.167800&r=122.047400&u=25.336300&d=21.866000&ez=15&lm=800&cnt=50&page=1";
-		    URL url = new URL(path);
-		    Log.i(TAG,path);
-		    
-		    // 打開一個HttpURLConnection連接
-		    HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();  
-		    
-		    //
-		    int xxx = httpConn.getResponseCode();
-		    Log.i(MainActivity.TAG, String.valueOf(xxx));
-		    
-		    if (httpConn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-		    	InputStream  input = new BufferedInputStream(httpConn.getInputStream());
-		    	handler.obtainMessage(Result_Data,readStream(input)).sendToTarget();
-		    	input.close();
-		    	//disconnect
-				httpConn.disconnect();
-            }
-		    
-		} catch(IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	private String readStream(InputStream is) {
-	    try {
-			ByteArrayOutputStream bo = new ByteArrayOutputStream();
-			int i = is.read();
-			while(i != -1) {
-				bo.write(i);
-				i = is.read();
-			}
-			return bo.toString();
-	    } catch (IOException e) {
-	    	return "";
-	    }
-	}
-	
-	*********************************************************************/
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.result);
 		
-		Bundle bundle = this.getIntent().getExtras();
-		species = bundle.getInt("species");
-		Log.i(TAG,"species"+species);
-		 
 		SetView();
 		lms = (LocationManager) getSystemService(LOCATION_SERVICE);	//取得系統定位服務
 		
-		/***********************************************
-		BackgroundThread = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				try {
-					requestByGet();
-				} catch (Throwable e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
-		************************************************/
 	}
 	
 	private void SetView() {
@@ -228,7 +65,7 @@ public class MainActivity extends Activity implements LocationListener {
 		webSettings.setBuiltInZoomControls(true);
 		webview.setWebChromeClient(new WebChromeClient());
 		webview.addJavascriptInterface(new webobj(),"inwcall");
-		webview.loadUrl("file:///android_asset/butterfly.html");
+		webview.loadUrl("file:///android_asset/index.html");
 	}
 	
 	class webobj {
@@ -272,13 +109,6 @@ public class MainActivity extends Activity implements LocationListener {
 			lat = location.getLatitude();	//取得緯度
 			Log.i(TAG,"經度:"+lng+"緯度:"+lat);
 			webview.loadUrl("javascript:Android_to_JS_Latlng('23.945154695027593','120.98384857177734',"+species+")");
-			
-			/*******************************
-			if(!onThreadStatus){
-				onThreadStatus = true;
-				BackgroundThread.start();
-			}
-			*******************************/
 		} else {
 			Toast.makeText(this, "無法定位座標", Toast.LENGTH_LONG).show();
 		}
