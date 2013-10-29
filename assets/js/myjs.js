@@ -12,7 +12,8 @@ var A_i35_1,
 var canDoing = true;
 var imgNum = 0;
 
-function initialize() {
+function initialize(theSpeciesID) {
+
   centerPoint = new google.maps.LatLng(23.828677,120.80148);
   var mapOptions = {
     zoom: 13,
@@ -29,10 +30,11 @@ function initialize() {
     mark(point.lat(),point.lng());
     placeMarker(point.lat(),point.lng());
     //執行ajax
-    AjaxPost(1,point.lat(),point.lng());
+    AjaxPost(theSpeciesID,point.lat(),point.lng());
   }
  });
   resultDiv = document.getElementById("result");
+  window.addEventListener("deviceorientation", Change_Sensor_Deviceorientation, true);
 }
 
 function mark(lat, lng){ //標註座標函式
@@ -100,8 +102,6 @@ function AjaxPost(theSpeciesID,LocationLat,LocationLng) {
   });
 }
 
-window.addEventListener("deviceorientation", Change_Sensor_Deviceorientation, true);
-
 function Change_Sensor_Deviceorientation(event) {
   var ax = "Acceleration X value- " + event.beta,
       ay = "Acceleration Y value- " + event.gamma,
@@ -126,7 +126,7 @@ function Change_Sensor_Deviceorientation(event) {
   }
 }
 
-function GetLocationAndSelect() {
+function GetLocationAndSelect(theSpeciesID) {
   theLng = window.inwcall.GetLocationLng();
   theLat = window.inwcall.GetLocationLat();
   
@@ -135,7 +135,7 @@ function GetLocationAndSelect() {
   } else { //有取得經緯度
     mark(theLat,theLng);
     placeMarker(theLat,theLng);
-    AjaxPost(1,theLat,theLng);
+    AjaxPost(theSpeciesID,theLat,theLng);
   }
 }
 
