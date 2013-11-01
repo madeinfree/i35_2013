@@ -103,7 +103,7 @@ function AjaxPost(theSpeciesID,LocationLat,LocationLng) {
     cache:false,
     dataType:"text",
     success:function(data){
-      latlngDiv.innerHTML = '搜尋經度：'+LocationLng+'搜尋緯度：'+LocationLat;
+      //latlngDiv.innerHTML = '搜尋經度：'+LocationLng+'搜尋緯度：'+LocationLat;
       if(data === ''){
         resultDiv.innerHTML = '<h3 style="color:red;">查無生物。</h3>';
         return;
@@ -113,9 +113,10 @@ function AjaxPost(theSpeciesID,LocationLat,LocationLng) {
         A_i35_2[i] = (A_i35_1[i].trim()).split(",");
       }
       if(theSpeciesID==1){
-        resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://www.i35.club.tw/tools/picture.php?pid=" + A_i35_2[0][1] + "\" />" + "<br />生物編號：" + A_i35_2[0][1] + "<br />中文學名：" + A_i35_2[0][2] + "<br />中文科名：" + A_i35_2[0][3] + "<br />簡易分類名稱：" + A_i35_2[0][0];
-      } else if(theSpeciesID==2) {
-        resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://"+A_i35_2[0][4]+"\" />生物名稱："+A_i35_2[0][5]+"<br />距離："+A_i35_2[0][6]+"公尺<br />採集日期："+A_i35_2[0][2]+"<br />採集者："+A_i35_2[0][3];
+        //resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://www.i35.club.tw/tools/picture.php?pid=" + A_i35_2[0][1] + "\" />" + "<br />生物編號：" + A_i35_2[0][1] + "<br />中文學名：" + A_i35_2[0][2] + "<br />中文科名：" + A_i35_2[0][3] + "<br />簡易分類名稱：" + A_i35_2[0][0];
+        resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://www.i35.club.tw/tools/picture.php?pid=" + A_i35_2[0][1] + "\" />" + "<br />中文學名：" + A_i35_2[0][2] + "<br />中文科名：" + A_i35_2[0][3] + "<br/>採集者：" + A_i35_2[0][4] + "<br/>採集日期：" + A_i35_2[0][5] + "<br/>距離：" + A_i35_2[0][6];
+      } else if(theSpeciesID==2) { //生物名稱："+A_i35_2[0][5]+"<br />
+        resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://"+A_i35_2[0][4]+"\" />距離："+A_i35_2[0][6]+"公尺<br />採集日期："+A_i35_2[0][2]+"<br />採集者："+A_i35_2[0][3];
       } else if(theSpeciesID==3) {
         resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"\" />距離："+A_i35_2[0][5]+"公尺<br />生物名稱："+A_i35_2[0][1]+"<br />科名："+A_i35_2[0][2]+"<br />採集者："+A_i35_2[0][3]+"<br />採集時間："+A_i35_2[0][4];
       }
@@ -136,8 +137,8 @@ function Change_Sensor_Deviceorientation(event) {
     canDoing = false;
     if(SpeciesID==1) {
       resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://www.i35.club.tw/tools/picture.php?pid=" + A_i35_2[imgNum][1] + "\" />" + "<br />生物編號：" + A_i35_2[imgNum][1] + "<br />中文學名：" + A_i35_2[imgNum][2] + "<br />中文科名：" + A_i35_2[imgNum][3] + "<br />簡易分類名稱：" + A_i35_2[imgNum][0];
-    } else if(SpeciesID==2) {
-      resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://"+A_i35_2[imgNum][4]+"\" />生物名稱："+A_i35_2[imgNum][5]+"<br />距離："+A_i35_2[imgNum][6]+"公尺<br />採集日期："+A_i35_2[imgNum][2]+"<br />採集者："+A_i35_2[imgNum][3];
+    } else if(SpeciesID==2) { //生物名稱："+A_i35_2[imgNum][5]+"<br />
+      resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://"+A_i35_2[imgNum][4]+"\" />距離："+A_i35_2[imgNum][6]+"公尺<br />採集日期："+A_i35_2[imgNum][2]+"<br />採集者："+A_i35_2[imgNum][3];
     } else if(SpeciesID==3) {
       resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"\" />距離："+A_i35_2[imgNum][5]+"公尺<br />生物名稱："+A_i35_2[imgNum][1]+"<br />科名："+A_i35_2[imgNum][2]+"<br />採集者："+A_i35_2[imgNum][3]+"<br />採集時間："+A_i35_2[imgNum][4];
     }
@@ -151,8 +152,8 @@ function Change_Sensor_Deviceorientation(event) {
     canDoing = false;
     if(SpeciesID==1) {
       resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://www.i35.club.tw/tools/picture.php?pid=" + A_i35_2[imgNum][1] + "\" />" + "<br />生物編號：" + A_i35_2[imgNum][1] + "<br />中文學名：" + A_i35_2[imgNum][2] + "<br />中文科名：" + A_i35_2[imgNum][3] + "<br />簡易分類名稱：" + A_i35_2[imgNum][0];
-    } else if(SpeciesID==2) {
-      resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://"+A_i35_2[imgNum][4]+"\" />生物名稱："+A_i35_2[imgNum][5]+"<br />距離："+A_i35_2[imgNum][6]+"公尺<br />採集日期："+A_i35_2[imgNum][2]+"<br />採集者："+A_i35_2[imgNum][3];
+    } else if(SpeciesID==2) { //生物名稱："+A_i35_2[imgNum][5]+"<br />
+      resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://"+A_i35_2[imgNum][4]+"\" />距離："+A_i35_2[imgNum][6]+"公尺<br />採集日期："+A_i35_2[imgNum][2]+"<br />採集者："+A_i35_2[imgNum][3];
     } else if(SpeciesID==3) {
       resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"\" />距離："+A_i35_2[imgNum][5]+"公尺<br />生物名稱："+A_i35_2[imgNum][1]+"<br />科名："+A_i35_2[imgNum][2]+"<br />採集者："+A_i35_2[imgNum][3]+"<br />採集時間："+A_i35_2[imgNum][4];
     }

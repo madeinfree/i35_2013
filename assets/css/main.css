@@ -1,3 +1,12 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: #D6FFAF;
+}
+
 .banner {
 	width:100%;
 }
@@ -21,6 +30,15 @@ a:hover {
 	position: relative;
 	margin: 0 auto;
 	text-align: center;
+}
+
+.organism_title {
+	width: 100%;
+	background-color: #0865A8;
+	color:#FFFFFF;
+	padding: 0px 5px;
+	text-align: center;
+	font-weight:bold;
 }
 
 .button1 {

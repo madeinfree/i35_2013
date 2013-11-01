@@ -1,12 +1,5 @@
 package com.example.i35_2013;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,32 +9,22 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressLint("JavascriptInterface")
 public class MainActivity extends Activity implements LocationListener {
 	private static final String TAG = "i35_2013";
 	private WebView webview;
-	private String[][] resultrow;
-	private StringBuilder theText = new StringBuilder();
-	private String path;
 	private long exitTime = 0;
 	private double lng=0,lat=0;
 	private LocationManager lms;
 	private String choiceProvider;
 	private boolean getService = false;
-	private Thread BackgroundThread;
-	private boolean onThreadStatus = false;
-	private boolean onSearch = false;
-	private int species;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

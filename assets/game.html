@@ -4,10 +4,6 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 	<title>天羅地網 - 拼圖遊戲</title>
-	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-    <script src="js/myjs.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<script type="text/javascript">
 	var imga;
@@ -19,8 +15,7 @@
 	var NN;
 	var state;
 	var mx,my;
-	var cnt=0;
-	function init(a,gsrc)
+	function init(a,gsrc) //a=格子數 gsrc=圖片網址
 	{
 		IE = document.all ? true : false;
 		if (window.addEventListener) 
@@ -31,37 +26,54 @@
 		{
 			document.getElementById("obj").attachEvent('onmousedown',swap);
 		}
+		//每排幾個
 	    N=a;
+	    //格子數量
 		NN=a*a;
+		//取得obj dom
 		c=document.getElementById("obj");
+		//建立一個Image
 		imageObj = new Image();
+		//image的連結為圖片網址
 	    imageObj.src = gsrc;
+	    //W=圖片寬 H=圖片高
 		W=imageObj.width;
 		H=imageObj.height;
+		/*
+		//
+		var theleftpoint=-(W/2);
+		//設定位置置中
+		c.style.marginLeft=theleftpoint+'px';
+		*/
+		//設定下方說明div之位置
+		var theMessage = document.getElementById('themessage');
+		var distance = 100+imageObj.height;
+		theMessage.style.top=distance+'px';
+		//sW=每個格子寬度 sH=每個格子高度
 		sW=W/a;
 		sH=H/a;
+		//建立陣列儲存陣列數字
 		imga=new Array(NN);
 	    for (i=0;i<a*a;i++)
 			imga[i]=i;
+		//亂數
 		imga.shuffle();
-		//document.getElementById("small").height=imageObj.height/2;
-		//document.getElementById("small").width=imageObj.width/2;
-	    document.getElementById("obj").width=imageObj.width+2;
+		//設定obj的寬和高
+	    document.getElementById("obj").width=imageObj.width+2
 		document.getElementById("obj").height=imageObj.height+2;
-		document.getElementById("obj").style.top=(parseInt(document.getElementById("index").style.top))+"px";
-		document.getElementById("obj").style.left=(imageObj.width/2+50)+"px";
+		//document.getElementById("obj").style.top=(imageObj.height+50)+"px";
 		ctx=c.getContext("2d");
-		//ctx.drawImage(imageObj,0,0);
+		ctx.drawImage(imageObj,0,0);
 	    var x,sx;
 	    var y,sy;
 	    for (y=0;y<N;y=y+1)
-	      for (x=0;x<N;x=x+1)
-		  {
-			id=y*N+x;
-			sx=imga[id]%N;
-			sy=parseInt(imga[id]/N);
-			ctx.drawImage(imageObj,sx*sW,sy*sH,sW,sH,x*sW,y*sH,sW,sH);
-		  }
+			for (x=0;x<N;x=x+1)
+			{
+				id=y*N+x;
+				sx=imga[id]%N;
+				sy=parseInt(imga[id]/N);
+				ctx.drawImage(imageObj,sx*sW,sy*sH,sW,sH,x*sW,y*sH,sW,sH);
+			}
 		ctx.strokeStyle = "#ffff00";
 		ctx.lineWidth = 2;
 	    for (y=0;y<=H;y=y+sH)
@@ -82,99 +94,98 @@
 	}
 	//打亂陣列用的
 	Array.prototype.shuffle = function(){
-	 var r = [];
-	 while(this.length > 0){
-	  var rd = Math.floor(Math.random()*this.length);
-	  r.push(this[rd]);
-	  this.splice(rd,1);
-	 }
-	 for(var i = 0 ; i < r.length ; i++){
-	  this.push(r[i]);
-	 }
-	 return this;
+		var r = [];
+		while(this.length > 0){
+			var rd = Math.floor(Math.random()*this.length);
+			r.push(this[rd]);
+			this.splice(rd,1);
+		}
+		for(var i = 0 ; i < r.length ; i++){
+			this.push(r[i]);
+		}
+		return this;
 	}
 	function swap(e) {
-	 var evt=window.event || e; //evt evaluates to window.event or inexplicit e object, depending on which one is defined
-	        if (IE) {
-				mx=evt.clientX;
-	            my=evt.clientY;
-	        }
-	        else {
-	            mx=evt.pageX;
-	            my=evt.pageY;
-	        }
-			my=my-parseInt(document.getElementById("obj").style.top);
-			mx=mx-parseInt(document.getElementById("obj").style.left);
-			//alert(mx+"  "+my+"  "+state);
-			var x,sx;
-	    	var y,sy;
-			if (state < 0) //first time
-	        {
-				x=parseInt(mx/sW);
-				y=parseInt(my/sH);
-				ctx=c.getContext("2d");	
-				ctx.strokeStyle = "#ff0000";
-	    		ctx.lineWidth = 2;
-				ctx.beginPath();
-				ctx.rect(x*sW,y*sH,sW,sH);
-				ctx.stroke();
-				state=y*N+x;
-	        }
-	        else //swap
-	        {
-				x=parseInt(mx/sW);
-				y=parseInt(my/sH);
-				tmp=imga[state];
-				imga[state]=imga[y*N+x];
-				imga[y*N+x]=tmp;
-				ctx=c.getContext("2d");	
-	    		for (y=0;y<N;y=y+1)
-	      		for (x=0;x<N;x=x+1)
-	      		{
-	        		id=y*N+x;
-	        		sx=imga[id]%N;
-	        		sy=parseInt(imga[id]/N);
-	        		ctx.drawImage(imageObj,sx*sW,sy*sH,sW,sH,x*sW,y*sH,sW,sH);
-	      		}
-	    		ctx.strokeStyle = "#ffff00";
-	    		ctx.lineWidth = 2;
-	    		for (y=0;y<=H;y=y+sH)
-	    		{
-	        		ctx.beginPath();
-	        		ctx.moveTo(0,y);
-	        		ctx.lineTo(W-1,y);
-	        		ctx.stroke();
-	    		}
-	    		for (x=0;x<=W;x=x+sW)
-	    		{
-	        		ctx.beginPath();
-	        		ctx.moveTo(x,0);
-	        		ctx.lineTo(x,H-1);
-	        		ctx.stroke();
-	    		}
-				state=-1;
-				cnt=cnt+1;
-				flag=true;
-				for (i=0;i<NN;i++)
-					if (imga[i]!=i) flag=false;
-				if (flag)
-					document.getElementById("msg").innerHTML="<font color=\"yellow\">恭喜您完成拼圖了用了 "+cnt+" 次移動</font>";
-				else
-					document.getElementById("msg").innerHTML="<font color=\"yellow\">這是第 "+cnt+" 次移動</font>";
-				
-	        }
-	        return false;
+		var evt=window.event || e; //evt evaluates to window.event or inexplicit e object, depending on which one is defined
+        if (IE) {
+			mx=evt.clientX;
+            my=evt.clientY;
+        }
+        else {
+            mx=evt.pageX;
+            my=evt.pageY;
+        }
+        console.log('mx:'+mx+' my:'+my);
+		my=my-parseInt(document.getElementById("obj").style.top);
+		mx=mx-parseInt(document.getElementById("obj").style.left);
+		
+		//alert(mx+"  "+my+"  "+state);
+		var x,sx;
+    	var y,sy;
+		if (state < 0) //first time
+        {
+			x=parseInt(mx/sW);
+			y=parseInt(my/sH);
+			ctx=c.getContext("2d");	
+			ctx.strokeStyle = "#ff0000";
+    		ctx.lineWidth = 2;
+			ctx.beginPath();
+			ctx.rect(x*sW,y*sH,sW,sH);
+			ctx.stroke();
+			state=y*N+x;
+        }
+        else //swap
+        {
+			x=parseInt(mx/sW);
+			y=parseInt(my/sH);
+			tmp=imga[state];
+			imga[state]=imga[y*N+x];
+			imga[y*N+x]=tmp;
+			ctx=c.getContext("2d");	
+    		for (y=0;y<N;y=y+1)
+      		for (x=0;x<N;x=x+1)
+      		{
+        		id=y*N+x;
+        		sx=imga[id]%N;
+        		sy=parseInt(imga[id]/N);
+        		ctx.drawImage(imageObj,sx*sW,sy*sH,sW,sH,x*sW,y*sH,sW,sH);
+      		}
+    		ctx.strokeStyle = "#ffff00";
+    		ctx.lineWidth = 2;
+    		for (y=0;y<=H;y=y+sH)
+    		{
+        		ctx.beginPath();
+        		ctx.moveTo(0,y);
+        		ctx.lineTo(W-1,y);
+        		ctx.stroke();
+    		}
+    		for (x=0;x<=W;x=x+sW)
+    		{
+        		ctx.beginPath();
+        		ctx.moveTo(x,0);
+        		ctx.lineTo(x,H-1);
+        		ctx.stroke();
+    		}
+			state=-1;
+			flag=true;
+			for (i=0;i<NN;i++)
+				if (imga[i]!=i) flag=false;
+			if (flag)
+				document.getElementById("msg").innerHTML="<font color=\"yellow\">恭喜您完成拼圖了</font>";
+			
+        }
+        return false;
 	}
 	</script>
 </head>
-<body style="background-color:#000;font-color:#eeeeee " onload="init(5,'http://www.i35.club.tw/tools/picture.php?pid=2657&size=512')">
-<div id="msg"><font color="yellow">開始拼圖，請點選兩張小圖互換</a></font></div>
-<div id="index" style="background-color:0;">
-<font color="red">完成圖：</font><br/><img id="small" src="http://www.i35.club.tw/tools/picture.php?pid=2657&size=512" style="width:100%;"/>
-</div>
-<br>
-<div>
-<canvas id="obj" style="width:100%;"></canvas>
+<body onload="init(5,'http://www.i35.club.tw/tools/picture.php?pid=2657&size=512')">
+<center><h1>拼圖遊戲</h1></center>
+<canvas id="obj" style="position:absolute;top:100px;left:180px;"></canvas>
+<div id="themessage" style="position:absolute;">
+	<div id="msg">開始拼圖，請點選兩張小圖互換</div>
+	<div id="index" style="background-color:0;">
+		<font color="red">完成圖：</font><br/><img id="small" src="http://www.i35.club.tw/tools/picture.php?pid=2657&size=512" style="width:100%;"/>
+	</div>
 </div>
 </body>
 </html>
