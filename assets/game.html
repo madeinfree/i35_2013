@@ -27,6 +27,8 @@
 		{
 			document.getElementById("obj").attachEvent('onmousedown',swap);
 		}
+		//取得網頁寬度
+		bodyWidth = document.body.offsetWidth;
 		//每排幾個
 	    N=a;
 	    //格子數量
@@ -43,8 +45,6 @@
 		//調整obj位置
 		var themessage = document.getElementById('themessage');
 		c.style.top = (themessage.offsetHeight+100) + 'px';
-		//取得網頁寬度
-		bodyWidth = document.body.offsetWidth;
 		//sW=每個格子寬度 sH=每個格子高度
 		sW=W/a;
 		sH=H/a;
@@ -55,6 +55,7 @@
 		//亂數
 		imga.shuffle();
 		//設定obj的寬和高
+		//bodyWidth 網頁寬度
 	    document.getElementById("obj").width=imageObj.width+2
 		document.getElementById("obj").height=imageObj.height+2;
 		//document.getElementById("obj").style.top=(imageObj.height+50)+"px";

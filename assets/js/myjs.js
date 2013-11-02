@@ -113,12 +113,11 @@ function AjaxPost(theSpeciesID,LocationLat,LocationLng) {
         A_i35_2[i] = (A_i35_1[i].trim()).split(",");
       }
       if(theSpeciesID==1){
-        //resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://www.i35.club.tw/tools/picture.php?pid=" + A_i35_2[0][1] + "\" />" + "<br />生物編號：" + A_i35_2[0][1] + "<br />中文學名：" + A_i35_2[0][2] + "<br />中文科名：" + A_i35_2[0][3] + "<br />簡易分類名稱：" + A_i35_2[0][0];
-        resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://www.i35.club.tw/tools/picture.php?pid=" + A_i35_2[0][1] + "\" />" + "<br />中文學名：" + A_i35_2[0][2] + "<br />中文科名：" + A_i35_2[0][3] + "<br/>採集者：" + A_i35_2[0][4] + "<br/>採集日期：" + A_i35_2[0][5] + "<br/>距離：" + A_i35_2[0][6];
+        resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://www.i35.club.tw/tools/picture.php?pid=" + A_i35_2[0][1] + "\" />" + "<br />中文學名：" + A_i35_2[0][2] + "<br />中文科名：" + A_i35_2[0][3] + "<br/>採集者：" + A_i35_2[0][4] + "<br/>採集日期：" + A_i35_2[0][5] + "<br/>距離：" + A_i35_2[0][6]+"<br/>其他資訊：<a href=\"http://zh.wikipedia.org/wiki/%E8%9D%B4%E8%9D%B6\">維基</a> <a href=\"https://www.google.com.tw/#q=%E8%9D%B4%E8%9D%B6\">Google</a>";
       } else if(theSpeciesID==2) { //生物名稱："+A_i35_2[0][5]+"<br />
-        resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://"+A_i35_2[0][4]+"\" />距離："+A_i35_2[0][6]+"公尺<br />採集日期："+A_i35_2[0][2]+"<br />採集者："+A_i35_2[0][3];
+        resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://"+A_i35_2[0][4]+"\" />距離："+A_i35_2[0][6]+"公尺<br />採集日期："+A_i35_2[0][2]+"<br />採集者："+A_i35_2[0][3]+"<br/>其他資訊：<a href=\"http://zh.wikipedia.org/wiki/%E9%9D%92%E8%9B%99\">維基</a> <a href=\"https://www.google.com.tw/#q=%E9%9D%92%E8%9B%99\">Google</a>";
       } else if(theSpeciesID==3) {
-        resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"\" />距離："+A_i35_2[0][5]+"公尺<br />生物名稱："+A_i35_2[0][1]+"<br />科名："+A_i35_2[0][2]+"<br />採集者："+A_i35_2[0][3]+"<br />採集時間："+A_i35_2[0][4];
+        resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"\" />距離："+A_i35_2[0][5]+"公尺<br />生物名稱："+A_i35_2[0][1]+"<br />科名："+A_i35_2[0][2]+"<br />採集者："+A_i35_2[0][3]+"<br />採集時間："+A_i35_2[0][4]+"<br/>其他資訊：<a href=\"http://zh.wikipedia.org/wiki/%E8%9B%BE\">維基</a> <a href=\"https://www.google.com.tw/#q=%E8%9B%BE\">Google</a>";
       }
     },
     error:function(data){
@@ -136,11 +135,11 @@ function Change_Sensor_Deviceorientation(event) {
     if(imgNum <= 0) imgNum = 0;
     canDoing = false;
     if(SpeciesID==1) {
-      resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://www.i35.club.tw/tools/picture.php?pid=" + A_i35_2[imgNum][1] + "\" />" + "<br />生物編號：" + A_i35_2[imgNum][1] + "<br />中文學名：" + A_i35_2[imgNum][2] + "<br />中文科名：" + A_i35_2[imgNum][3] + "<br />簡易分類名稱：" + A_i35_2[imgNum][0];
+      resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://www.i35.club.tw/tools/picture.php?pid=" + A_i35_2[imgNum][1] + "\" />" + "<br />中文學名：" + A_i35_2[imgNum][2] + "<br />中文科名：" + A_i35_2[imgNum][3] + "<br/>採集者：" + A_i35_2[imgNum][4] + "<br/>採集日期：" + A_i35_2[imgNum][5] + "<br/>距離：" + A_i35_2[imgNum][6]+"<br/>其他資訊：<a href=\"http://zh.wikipedia.org/wiki/%E8%9D%B4%E8%9D%B6\">維基</a> <a href=\"https://www.google.com.tw/#q=%E8%9D%B4%E8%9D%B6\">Google</a>";
     } else if(SpeciesID==2) { //生物名稱："+A_i35_2[imgNum][5]+"<br />
-      resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://"+A_i35_2[imgNum][4]+"\" />距離："+A_i35_2[imgNum][6]+"公尺<br />採集日期："+A_i35_2[imgNum][2]+"<br />採集者："+A_i35_2[imgNum][3];
+      resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://"+A_i35_2[imgNum][4]+"\" />距離："+A_i35_2[imgNum][6]+"公尺<br />採集日期："+A_i35_2[imgNum][2]+"<br />採集者："+A_i35_2[imgNum][3]+"<br/>其他資訊：<a href=\"http://zh.wikipedia.org/wiki/%E9%9D%92%E8%9B%99\">維基</a> <a href=\"https://www.google.com.tw/#q=%E9%9D%92%E8%9B%99\">Google</a>";
     } else if(SpeciesID==3) {
-      resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"\" />距離："+A_i35_2[imgNum][5]+"公尺<br />生物名稱："+A_i35_2[imgNum][1]+"<br />科名："+A_i35_2[imgNum][2]+"<br />採集者："+A_i35_2[imgNum][3]+"<br />採集時間："+A_i35_2[imgNum][4];
+      resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"\" />距離："+A_i35_2[imgNum][5]+"公尺<br />生物名稱："+A_i35_2[imgNum][1]+"<br />科名："+A_i35_2[imgNum][2]+"<br />採集者："+A_i35_2[imgNum][3]+"<br />採集時間："+A_i35_2[imgNum][4]+"<br/>其他資訊：<a href=\"http://zh.wikipedia.org/wiki/%E8%9B%BE\">維基</a> <a href=\"https://www.google.com.tw/#q=%E8%9B%BE\">Google</a>";
     }
     setTimeout(function() {
       canDoing = true;
@@ -151,11 +150,11 @@ function Change_Sensor_Deviceorientation(event) {
     if(imgNum >= 3) imgNum = 3;
     canDoing = false;
     if(SpeciesID==1) {
-      resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://www.i35.club.tw/tools/picture.php?pid=" + A_i35_2[imgNum][1] + "\" />" + "<br />生物編號：" + A_i35_2[imgNum][1] + "<br />中文學名：" + A_i35_2[imgNum][2] + "<br />中文科名：" + A_i35_2[imgNum][3] + "<br />簡易分類名稱：" + A_i35_2[imgNum][0];
+      resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://www.i35.club.tw/tools/picture.php?pid=" + A_i35_2[imgNum][1] + "\" />" + "<br />中文學名：" + A_i35_2[imgNum][2] + "<br />中文科名：" + A_i35_2[imgNum][3] + "<br/>採集者：" + A_i35_2[imgNum][4] + "<br/>採集日期：" + A_i35_2[imgNum][5] + "<br/>距離：" + A_i35_2[imgNum][6]+"<br/>其他資訊：<a href=\"http://zh.wikipedia.org/wiki/%E8%9D%B4%E8%9D%B6\">維基</a> <a href=\"https://www.google.com.tw/#q=%E8%9D%B4%E8%9D%B6\">Google</a>";
     } else if(SpeciesID==2) { //生物名稱："+A_i35_2[imgNum][5]+"<br />
-      resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://"+A_i35_2[imgNum][4]+"\" />距離："+A_i35_2[imgNum][6]+"公尺<br />採集日期："+A_i35_2[imgNum][2]+"<br />採集者："+A_i35_2[imgNum][3];
+      resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"http://"+A_i35_2[imgNum][4]+"\" />距離："+A_i35_2[imgNum][6]+"公尺<br />採集日期："+A_i35_2[imgNum][2]+"<br />採集者："+A_i35_2[imgNum][3]+"<br/>其他資訊：<a href=\"http://zh.wikipedia.org/wiki/%E9%9D%92%E8%9B%99\">維基</a> <a href=\"https://www.google.com.tw/#q=%E9%9D%92%E8%9B%99\">Google</a>";
     } else if(SpeciesID==3) {
-      resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"\" />距離："+A_i35_2[imgNum][5]+"公尺<br />生物名稱："+A_i35_2[imgNum][1]+"<br />科名："+A_i35_2[imgNum][2]+"<br />採集者："+A_i35_2[imgNum][3]+"<br />採集時間："+A_i35_2[imgNum][4];
+      resultDiv.innerHTML = "<img style=\"width:100%;\" src=\"\" />距離："+A_i35_2[imgNum][5]+"公尺<br />生物名稱："+A_i35_2[imgNum][1]+"<br />科名："+A_i35_2[imgNum][2]+"<br />採集者："+A_i35_2[imgNum][3]+"<br />採集時間："+A_i35_2[imgNum][4]+"<br/>其他資訊：<a href=\"http://zh.wikipedia.org/wiki/%E8%9B%BE\">維基</a> <a href=\"https://www.google.com.tw/#q=%E8%9B%BE\">Google</a>";
     }
     setTimeout(function() {
       canDoing = true;
