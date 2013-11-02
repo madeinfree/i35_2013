@@ -15,6 +15,7 @@
 	var NN;
 	var state;
 	var mx,my;
+	var bodyWidth;
 	function init(a,gsrc) //a=格子數 gsrc=圖片網址
 	{
 		IE = document.all ? true : false;
@@ -39,16 +40,11 @@
 	    //W=圖片寬 H=圖片高
 		W=imageObj.width;
 		H=imageObj.height;
-		/*
-		//
-		var theleftpoint=-(W/2);
-		//設定位置置中
-		c.style.marginLeft=theleftpoint+'px';
-		*/
-		//設定下方說明div之位置
-		var theMessage = document.getElementById('themessage');
-		var distance = 100+imageObj.height;
-		theMessage.style.top=distance+'px';
+		//調整obj位置
+		var themessage = document.getElementById('themessage');
+		c.style.top = (themessage.offsetHeight+100) + 'px';
+		//取得網頁寬度
+		bodyWidth = document.body.offsetWidth;
 		//sW=每個格子寬度 sH=每個格子高度
 		sW=W/a;
 		sH=H/a;
@@ -179,9 +175,9 @@
 	</script>
 </head>
 <body onload="init(5,'http://www.i35.club.tw/tools/picture.php?pid=2657&size=512')">
-<center><h1>拼圖遊戲</h1></center>
-<canvas id="obj" style="position:absolute;top:100px;left:180px;"></canvas>
-<div id="themessage" style="position:absolute;">
+<div class="organism_title"><span style="font-size:30px;">拼圖遊戲</span></div>
+<canvas id="obj" style="position:absolute;top:100px;left:0px;"></canvas>
+<div id="themessage" style="position:absolute;top:50px;width:100%;">
 	<div id="msg">開始拼圖，請點選兩張小圖互換</div>
 	<div id="index" style="background-color:0;">
 		<font color="red">完成圖：</font><br/><img id="small" src="http://www.i35.club.tw/tools/picture.php?pid=2657&size=512" style="width:100%;"/>
